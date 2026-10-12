@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "timeline": {
+      "url": "https://curator.vumbualabs.com/mcp",
+      "auth": "oauth",
+      "required": false,
+      "scopes": [
+        "read:curation-context",
+        "write:curation-runs",
+        "write:story-batches",
+        "read:job-search-context",
+        "write:job-batches",
+        "read:approved-applications",
+        "write:application-progress"
+      ],
+      "tool_timeout_sec": 120
+    }
+  }
+}
