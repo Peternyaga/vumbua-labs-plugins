@@ -34,7 +34,14 @@ codex plugin add timeline-curator@vumbua-labs
 
 ## Existing installations
 
-If you added Vumbua Labs using a product repository previously, run the new marketplace-add command above. It replaces the source for the same `vumbua-labs` marketplace rather than adding a second marketplace. Plugin identifiers, server names, scopes and service endpoints are retained. Refresh your installed plugin with `codex plugin add`, restart desktop and verify an authenticated read. Keep existing OAuth connections and poller credentials; reauthenticate only if the connection is missing or permissions require it. See the Fieldwork package README for preserving an existing Windows poller.
+If you added Vumbua Labs using a product repository previously, replace its source registration first:
+
+```powershell
+codex plugin marketplace remove vumbua-labs
+codex plugin marketplace add Peternyaga/vumbua-labs-plugins --ref main
+```
+
+This removes the old marketplace source registration; do not use `codex plugin remove`. The shared catalog retains the same `vumbua-labs` marketplace identity. Plugin identifiers, server names, scopes and service endpoints are retained. Refresh your installed plugin with `codex plugin add`, restart desktop and verify an authenticated read. Keep existing OAuth connections and poller credentials; reauthenticate only if the connection is missing or permissions require it. See the Fieldwork package README for preserving an existing Windows poller.
 
 ## Maintaining this catalog
 

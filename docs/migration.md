@@ -3,6 +3,7 @@
 Vumbua Labs now has a product-independent GitHub address: `Peternyaga/vumbua-labs-plugins`. The marketplace name remains `vumbua-labs`, and existing plugin IDs and OAuth endpoints are unchanged.
 
 ```powershell
+codex plugin marketplace remove vumbua-labs
 codex plugin marketplace add Peternyaga/vumbua-labs-plugins --ref main
 codex plugin marketplace upgrade vumbua-labs
 codex plugin add sales-workspace-hosted@vumbua-labs
