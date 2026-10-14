@@ -30,3 +30,7 @@ Neither user-supplied information nor a public listing is independently verified
 Re-read the lead after each successful edit before editing another field. On a version conflict, review the new record before deciding whether the correction still applies. After interruption, inspect history for completed edits before retrying. The server retains old/new values, actor, and provenance and synchronizes linked contact details.
 
 For queued agent work, use the packaged agent-work skill: profile edits and `resolve_agent_work` are separate transactions. Report only successful changes. These tools do not send outreach.
+
+## Explicit project boundary
+
+Record tools require `project_id` from `list_projects`. Identify the authorized project before reading or changing records; ask only if the intended project is ambiguous. Never infer it from another browser's current selection. Read-only list tools accept the explicit `all` value and retain account/role restrictions; every mutation requires one project ID. Queued work carries its project ID; use it for every subsequent call. Local lead moves take `source_project_id` plus the destination `project_id`. A moved lead's linked data follows it, and pending instructions are referred for human review. SMTP credentials stay private to the requesting user; each project has that user's explicit sender selection.

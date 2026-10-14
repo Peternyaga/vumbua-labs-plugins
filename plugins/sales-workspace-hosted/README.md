@@ -1,6 +1,6 @@
-# Fieldwork Reach for Codex — 0.4.6
+# Fieldwork Reach for Codex — 0.4.8
 
-Connect to https://reach.vumbualabs.com/mcp using OAuth. Manage accessible leads and internal tasks, correct eleven profile fields with provenance and retained history, and process queued work with guarded reversal. Version 0.4.5 adds optional, individually authorized lead email through each user's connected SMTP mailbox. No calls or external calendar events are made. This version is local source until you publish it; the installed marketplace version remains unchanged.
+Connect to https://reach.vumbualabs.com/mcp using OAuth. Manage accessible leads and internal tasks, correct eleven profile fields with provenance and retained history, and process queued work with guarded reversal. Version 0.4.5 adds optional, individually authorized lead email through each user's connected SMTP mailbox. No calls or external calendar events are made.
 
 ## Install
 
@@ -11,7 +11,7 @@ codex plugin marketplace add Peternyaga/vumbua-labs-plugins --ref main
 codex plugin add sales-workspace-hosted@vumbua-labs
 ```
 
-Restart Codex desktop, open a new chat and connect Fieldwork Reach to your own Fieldwork account. If linking was not offered, run `codex mcp login fieldwork`. Approve only the scopes you need: `leads:read`, `leads:write`, `tasks:write`, and, if you want explicitly authorized agent email, `email:send`. Each person must connect an SMTP mailbox in Fieldwork separately. Ask the plugin to read your current follow-ups to verify the connection. A Fieldwork owner must provision your account; installing the plugin does not create an account or grant access to other workspaces.
+Restart Codex desktop, open a new chat and connect Fieldwork Reach to your own Fieldwork account. If linking was not offered, run `codex mcp login fieldwork`. Approve only the scopes you need: `leads:read`, `leads:write`, `tasks:write`, and, if you want explicitly authorized agent email, `email:send`. Each person must connect an SMTP mailbox in Fieldwork separately. Ask the plugin to read your current follow-ups to verify the connection. New to Reach? Choose **Create account** in the browser connection to create your independent workspace and owner account, then sign in and review the requested permissions. You can also register at https://reach.vumbualabs.com/signup. To join an existing workspace, ask its owner for an invitation instead. Each email belongs to one account in one workspace; creating an account grants no access to another workspace.
 
 ## Update
 
@@ -45,3 +45,11 @@ The optional Windows poller now launches without a visible console. Running the 
 Moves distribution to the dedicated Vumbua Labs catalog while retaining the same plugin identity and OAuth endpoint. Includes the dedicated lead-profile skill, updated queue correction/recovery guidance and a poller prompt that invokes that workflow. Profile fields: phone, email, website, Facebook, Instagram, LinkedIn, name, organisation, contact role, location and source. Each tool requires current version and factual provenance. Historical values are retained. Ambiguous evidence needs review.
 
 Source: [Fieldwork sales workspace](https://github.com/Peternyaga/fieldwork-sales-workspace/tree/main/sales-workspace-hosted). Distribution: [Vumbua Labs](https://github.com/Peternyaga/vumbua-labs-plugins/tree/main/plugins/sales-workspace-hosted).
+
+## Project context (0.4.7)
+
+All record tools require an explicit project ID. Discover it with `list_projects`; lists support the explicit `all` value. Background work discovers all accessible queued items and uses each returned item's project ID for every subsequent action. Browser selection never changes an agent's scope. Connected SMTP accounts remain private to each user; select a sender for each project in the website. Legacy SMTP credentials are preserved but require an explicit project selection after upgrading. Refresh this plugin together with the server upgrade.
+
+## Self-service signup (0.4.8)
+
+Updates setup guidance for public workspace registration. Existing invited accounts and connections remain supported. Deploy the server package first; installing this source package alone does not add registration to the server. Email ownership verification and automated owner password recovery are not included; keep your password safe and contact the site operator if an owner needs recovery.
