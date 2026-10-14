@@ -8,6 +8,19 @@ $mutex=New-Object System.Threading.Mutex($false,'Local\FieldworkReachPoller')
 if(-not $mutex.WaitOne(0)){exit 0}
 try {
     $config=Get-Content -LiteralPath (Join-Path $DataDirectory 'config.json') -Raw | ConvertFrom-Json
+    # The desktop updater replaces its versioned bin directory. Resolve the
+    # current executable at each run instead of relying on the setup-time path.
+    $codexCommand=Get-Command codex -ErrorAction SilentlyContinue
+    $codexBinary=if($codexCommand -and (Test-Path -LiteralPath $codexCommand.Source -PathType Leaf)){$codexCommand.Source}else{$null}
+    if(-not $codexBinary -and $config.codex -and (Test-Path -LiteralPath $config.codex -PathType Leaf)){$codexBinary=$config.codex}
+    if(-not $codexBinary){
+        $binRoot=Join-Path $env:LOCALAPPDATA 'OpenAI\Codex\bin'
+        if(Test-Path -LiteralPath $binRoot){
+            $current=Get-ChildItem -LiteralPath $binRoot -Filter codex.exe -File -Recurse -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+            if($current){$codexBinary=$current.FullName}
+        }
+    }
+    if(-not $codexBinary){throw 'Codex executable was not found after the app update. Reinstall or repair Codex.'}
     $cipher=[Convert]::FromBase64String((Get-Content -LiteralPath (Join-Path $DataDirectory 'credential.txt') -Raw).Trim())
     $bytes=[System.Security.Cryptography.ProtectedData]::Unprotect($cipher,$null,[System.Security.Cryptography.DataProtectionScope]::CurrentUser)
     $token=[Text.Encoding]::UTF8.GetString($bytes)
@@ -32,7 +45,7 @@ try {
         $previousErrorAction=$ErrorActionPreference
         try {
             $ErrorActionPreference='Continue'
-            & $config.codex exec -C $config.workspace -c 'web_search="live"' --approve-for-me $prompt *> $runLog
+            & $codexBinary exec -C $config.workspace -c 'web_search="live"' --approve-for-me $prompt *> $runLog
             $exitCode=$LASTEXITCODE
         } finally {
             $ErrorActionPreference=$previousErrorAction

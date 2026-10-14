@@ -1,4 +1,4 @@
-# Fieldwork Reach for Codex — 0.4.5 (prepared locally)
+# Fieldwork Reach for Codex — 0.4.6
 
 Connect to https://reach.vumbualabs.com/mcp using OAuth. Manage accessible leads and internal tasks, correct eleven profile fields with provenance and retained history, and process queued work with guarded reversal. Version 0.4.5 adds optional, individually authorized lead email through each user's connected SMTP mailbox. No calls or external calendar events are made. This version is local source until you publish it; the installed marketplace version remains unchanged.
 
@@ -22,7 +22,11 @@ codex plugin add sales-workspace-hosted@vumbua-labs
 
 Restart Codex desktop and test in a new chat. Reapprove OAuth only if the existing connection is missing or lacks the requested scopes. Server tool changes are discovered from the hosted MCP endpoint; bundled skill/script changes require refreshing the plugin package.
 
-## Release 0.4.5 (not yet published)
+## Release 0.4.6
+
+The Windows poller now resolves the current Codex executable each time it runs. This prevents a desktop-app update from leaving the poller pointed at a removed versioned `codex.exe` path. Re-running `scripts/install-poller.ps1 -Accept -WorkspaceRoot <your existing workspace>` copies the repaired script while preserving the existing pairing and schedule.
+
+## Release 0.4.5
 
 The poller treats authenticated notes as requests for safe internal work, investigates research requests before reporting a blocker, uses the workspace timezone and open internal slots for broad follow-up windows, and avoids recursively queueing agent-authored notes. The new `list_agent_reports` tool helps it inspect prior outcomes. Email sending needs both `email:send` OAuth permission and the lead-specific task checkbox; ordinary notes never authorize outbound email. Publish the server upgrade before refreshing this plugin; the older server does not expose these tools or permission.
 
