@@ -1,6 +1,6 @@
-# Fieldwork Reach for Codex — 0.4.4
+# Fieldwork Reach for Codex — 0.4.5 (prepared locally)
 
-Connect to https://reach.vumbualabs.com/mcp using OAuth. Manage accessible leads and internal tasks, correct eleven profile fields with provenance and retained history, and process queued work with guarded reversal. No calls, messages or external calendar events are sent.
+Connect to https://reach.vumbualabs.com/mcp using OAuth. Manage accessible leads and internal tasks, correct eleven profile fields with provenance and retained history, and process queued work with guarded reversal. Version 0.4.5 adds optional, individually authorized lead email through each user's connected SMTP mailbox. No calls or external calendar events are made. This version is local source until you publish it; the installed marketplace version remains unchanged.
 
 ## Install
 
@@ -11,7 +11,7 @@ codex plugin marketplace add Peternyaga/vumbua-labs-plugins --ref main
 codex plugin add sales-workspace-hosted@vumbua-labs
 ```
 
-Restart Codex desktop, open a new chat and connect Fieldwork Reach to your own Fieldwork account. If linking was not offered, run `codex mcp login fieldwork`. Approve only the scopes you need: `leads:read`, `leads:write`, `tasks:write`. Ask the plugin to read your current follow-ups to verify the connection. A Fieldwork owner must provision your account; installing the plugin does not create an account or grant access to other workspaces.
+Restart Codex desktop, open a new chat and connect Fieldwork Reach to your own Fieldwork account. If linking was not offered, run `codex mcp login fieldwork`. Approve only the scopes you need: `leads:read`, `leads:write`, `tasks:write`, and, if you want explicitly authorized agent email, `email:send`. Each person must connect an SMTP mailbox in Fieldwork separately. Ask the plugin to read your current follow-ups to verify the connection. A Fieldwork owner must provision your account; installing the plugin does not create an account or grant access to other workspaces.
 
 ## Update
 
@@ -21,6 +21,10 @@ codex plugin add sales-workspace-hosted@vumbua-labs
 ```
 
 Restart Codex desktop and test in a new chat. Reapprove OAuth only if the existing connection is missing or lacks the requested scopes. Server tool changes are discovered from the hosted MCP endpoint; bundled skill/script changes require refreshing the plugin package.
+
+## Release 0.4.5 (not yet published)
+
+The poller treats authenticated notes as requests for safe internal work, investigates research requests before reporting a blocker, uses the workspace timezone and open internal slots for broad follow-up windows, and avoids recursively queueing agent-authored notes. The new `list_agent_reports` tool helps it inspect prior outcomes. Email sending needs both `email:send` OAuth permission and the lead-specific task checkbox; ordinary notes never authorize outbound email. Publish the server upgrade before refreshing this plugin; the older server does not expose these tools or permission.
 
 ## Migrate from fieldwork-local
 

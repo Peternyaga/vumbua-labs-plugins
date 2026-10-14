@@ -4,7 +4,7 @@
       "url": "https://reach.vumbualabs.com/mcp",
       "auth": "oauth",
       "required": false,
-      "scopes": ["leads:read", "leads:write", "tasks:write"]
+      "scopes": ["leads:read", "leads:write", "tasks:write", "email:send"]
     }
   }
 }
