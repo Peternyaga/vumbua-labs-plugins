@@ -7,6 +7,8 @@ description: Correct hosted Fieldwork lead contact and profile fields with user-
 
 Use this workflow for authorized factual corrections to an accessible Fieldwork lead. Read `get_lead` first; inspect its current profile and activity history, including the source note when supplied.
 
+For a narrative research dossier, use `get_lead_research` / `update_lead_research` and [the research contract](../agent-work/references/research.md). Field corrections alone do not capture the business story, evidence, uncertainty or next action. Preserve supported current profile corrections; save unresolved identity conflicts as research holds rather than guessed names. Research revision is separate from profile version.
+
 Choose the specific tool for the field:
 
 | Field | Tool |

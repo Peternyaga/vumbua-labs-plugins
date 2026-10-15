@@ -53,3 +53,13 @@ All record tools require an explicit project ID. Discover it with `list_projects
 ## Self-service signup (0.4.8)
 
 Updates setup guidance for public workspace registration. Existing invited accounts and connections remain supported. Deploy the server package first; installing this source package alone does not add registration to the server. Email ownership verification and automated owner password recovery are not included; keep your password safe and contact the site operator if an owner needs recovery.
+
+## Unreleased research refinement source
+
+The source server adds durable lead research with `get_lead_research` / `update_lead_research`, existing `leads:read` / `leads:write` scopes, optimistic research revisions and idempotent requests. Agents save draft, ready for human review or hold; human review is recorded in the app. Source workflow guidance lives in `skills/agent-work/references/research.md`. An optional research object can be included with hosted lead creation and is validated/saved atomically. Basic capture remains compatible.
+
+These source changes require the matching server upgrade and a separately published/refreshed plugin to update installed instructions. This implementation has not published the plugin or changed installed caches, poller credentials or permissions.
+
+## Prepared 0.4.9 (not published)
+
+Version0.4.9 packages structured research instructions and source reference, plus the previously prepared agent-stage guidance/poller prompt. Installed0.4.8 is unchanged. The server and plugin archives are separate; refreshing the marketplace cannot retrieve0.4.9 until Peter publishes it. See the release archive's `PLUGIN-UPDATE-0.4.9.md` for the ordered server, publication, installed-plugin and existing-poller steps. No new scopes are requested.

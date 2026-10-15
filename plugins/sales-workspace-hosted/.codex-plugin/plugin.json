@@ -1,6 +1,6 @@
 {
   "name": "sales-workspace-hosted",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "Manage hosted Fieldwork leads, provenance-backed profile corrections, and internal follow-ups through account-linked MCP.",
   "author": {
     "name": "Vumbua Labs"
@@ -14,6 +14,7 @@
     "capabilities": [
       "Read leads",
       "Edit lead profiles with provenance",
+      "Save structured lead research with evidence",
       "Manage internal follow-ups",
       "Send individually authorized lead emails"
     ],
