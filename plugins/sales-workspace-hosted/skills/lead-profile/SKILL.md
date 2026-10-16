@@ -36,3 +36,12 @@ For queued agent work, use the packaged agent-work skill: profile edits and `res
 ## Explicit project boundary
 
 Record tools require `project_id` from `list_projects`. Identify the authorized project before reading or changing records; ask only if the intended project is ambiguous. Never infer it from another browser's current selection. Read-only list tools accept the explicit `all` value and retain account/role restrictions; every mutation requires one project ID. Queued work carries its project ID; use it for every subsequent call. Local lead moves take `source_project_id` plus the destination `project_id`. A moved lead's linked data follows it, and pending instructions are referred for human review. SMTP credentials stay private to the requesting user; each project has that user's explicit sender selection.
+
+
+## Current team and project authority
+
+`all` means only projects currently accessible to the authenticated account. Role capabilities, project scope and lead ownership are separate: project membership does not assign a salesperson every lead, and collectors cannot own sales leads. Use `list_team` with the lead's exact project to obtain eligible assignment recipients. Assignment never grants access. The workspace owner manages roles, scope and invitations in Team & access; a project manager cannot promote self or grant access.
+
+After a membership change, old browser, local-plugin, OAuth and poll credentials may be invalid. Stop and ask the user to sign in or reconnect using their current authority; never broaden permissions or silently recreate credentials. Queued execution also checks the requester's current role and access. Legacy instructions without authenticated requester provenance require human review and fresh instructions. Access denials are not retryable permission to use another project or account.
+
+Reassignment of an owned lead can require explicit choices to transfer the current owner's pending follow-ups and pause affected requests for human review. Obtain the user's intended handling; do not set transfer/review flags merely to get past a blocker. Preserve research holds and do not renew old email consent.

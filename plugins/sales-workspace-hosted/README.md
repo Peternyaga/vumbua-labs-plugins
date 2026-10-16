@@ -1,8 +1,10 @@
-# Fieldwork Reach for Codex — 0.4.8
+# Fieldwork Reach for Codex — 0.4.10
 
 Connect to https://reach.vumbualabs.com/mcp using OAuth. Manage accessible leads and internal tasks, correct eleven profile fields with provenance and retained history, and process queued work with guarded reversal. Version 0.4.5 adds optional, individually authorized lead email through each user's connected SMTP mailbox. No calls or external calendar events are made.
 
 ## Install
+
+The commands below require a separately usable Codex CLI in your terminal. Installing the ChatGPT desktop app alone does not guarantee that `codex` is available in PowerShell. Do not use a versioned executable inside the desktop app as a general CLI installation.
 
 Add the existing Vumbua Labs marketplace and install the hosted plugin:
 
@@ -54,12 +56,14 @@ All record tools require an explicit project ID. Discover it with `list_projects
 
 Updates setup guidance for public workspace registration. Existing invited accounts and connections remain supported. Deploy the server package first; installing this source package alone does not add registration to the server. Email ownership verification and automated owner password recovery are not included; keep your password safe and contact the site operator if an owner needs recovery.
 
-## Unreleased research refinement source
+## Structured research (0.4.9)
 
-The source server adds durable lead research with `get_lead_research` / `update_lead_research`, existing `leads:read` / `leads:write` scopes, optimistic research revisions and idempotent requests. Agents save draft, ready for human review or hold; human review is recorded in the app. Source workflow guidance lives in `skills/agent-work/references/research.md`. An optional research object can be included with hosted lead creation and is validated/saved atomically. Basic capture remains compatible.
+Durable lead research uses `get_lead_research` / `update_lead_research`, existing `leads:read` / `leads:write` scopes, optimistic research revisions and idempotent requests. Agents save draft, ready for human review or hold; human review is recorded in Reach. The bounded document reference is `skills/agent-work/references/research.md`. Optional research can be saved atomically with hosted lead creation. Basic capture remains compatible.
 
-These source changes require the matching server upgrade and a separately published/refreshed plugin to update installed instructions. This implementation has not published the plugin or changed installed caches, poller credentials or permissions.
+## Team access release (0.4.10)
 
-## Prepared 0.4.9 (not published)
+Adds current project-membership and authority guidance. Role capabilities, project access and lead ownership are separate. `list_team` takes the lead's explicit project and returns eligible recipients who already have access; assignment never grants access and collectors cannot own sales leads. Only workspace owners administer membership. Legacy queued instructions without authenticated requester provenance require human review and fresh instructions.
 
-Version0.4.9 packages structured research instructions and source reference, plus the previously prepared agent-stage guidance/poller prompt. Installed0.4.8 is unchanged. The server and plugin archives are separate; refreshing the marketplace cannot retrieve0.4.9 until Peter publishes it. See the release archive's `PLUGIN-UPDATE-0.4.9.md` for the ordered server, publication, installed-plugin and existing-poller steps. No new scopes are requested.
+Access changes can invalidate browser, local-plugin, OAuth and poll credentials. Sign in or reconnect deliberately with current authority; do not automatically expand scopes or recreate a poller. Reassignment may need the user's explicit choices to transfer pending follow-ups and pause affected requests. Research holds and email consent protections remain in place.
+
+Deploy the matching team-access server before using this release. Server tool schemas are discovered from the endpoint; bundled guidance needs a plugin refresh. Endpoint and requested OAuth scopes are unchanged from0.4.9, and poller script behavior is unchanged. Updating the plugin does not itself refresh or trigger an installed Windows scheduled worker. Restart the desktop app and use a fresh chat after updating.
